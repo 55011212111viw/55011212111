@@ -8,18 +8,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UITableViewDelegeate {
     @IBOutlet var totalTextFeild : UITextField!
     @IBOutlet var taxPctSlider : UISlider!
     @IBOutlet var taxPctLabel : UILabel!
-    @IBOutlet var resultsTextview : UITextView!
+   
+   
     
     let tipCalc = TipCalculatorModel(total : 33.25,taxPct: 0.06)
-    func refreshUI(){
-    totalTextFeild.text = String(format: "%0.2f",tipCalc.total)
-    taxPctSlider.value = Float(tipCalc.taxPct)*100.0
-    taxPctLabel.text = "Tax Precentage (\(Int(taxPctSlider.value))%)"
-    resultsTextview.text = ""
+    var possibleTips = D
     }
     
     override func viewDidLoad() {
@@ -52,7 +49,7 @@ class ViewController: UIViewController {
     }
     @IBAction func viweTapped(sender: AnyObject) {totalTextFeild.resignFirstResponder()
     }
-    
+    func tableView(tableView:UITableView!)
 
 }
 
