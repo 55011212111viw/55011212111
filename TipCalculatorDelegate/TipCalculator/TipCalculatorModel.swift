@@ -12,20 +12,23 @@ class TipCalculatorModel{
     
     var total:Double
     var taxPct:Double
-     var subtotal:Double
-    var tipAmt:Double
-    var finalTotal:Double
+    var subtotal:Double
     
+    {
+     get {
+      return total / (taxPct + 1)
+     }
+    }
     init(total:Double,taxPct:Double){
         self.total = total
         self.taxPct = taxPct
-        subtotal = total / (taxPct + 1)
-    }
+     }
+    
     
     func calcTipWithTipPct(tipPct:Double)->(tipAmt:Double,totol:Double){
         
-        let tipAmt = subtotal * tipAmt
-        let finalTotal = total * tipAmt
+        var tipAmt = subtotal * tipPct
+        var finalTotal = total * tipAmt
         return (tipAmt,finalTotal)
     }
     

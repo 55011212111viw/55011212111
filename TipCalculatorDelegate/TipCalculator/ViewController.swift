@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     @IBOutlet var totalTextFeild : UITextField!
     @IBOutlet var taxPctSlider : UISlider!
     @IBOutlet var taxPctLabel : UILabel!
-    @IBOutlet var resultsTextview : UITextView!
+    @IBOutlet var resultsTableView : UITableView!
     @IBOutlet var tableView: UITableView!
     
     let tipCalc = TipCalculatorModel(total : 33.25,taxPct: 0.06)
@@ -48,7 +48,7 @@ class ViewController: UIViewController {
     totalTextFeild.text = String(format: "%0.2f",tipCalc.total)
     taxPctSlider.value = Float(tipCalc.taxPct)*100.0
     taxPctLabel.text = "Tax Precentage (\(Int(taxPctSlider.value))%)"
-    resultsTextview.text = ""
+    resultsTableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -62,18 +62,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculateTapped(sender: AnyObject) {
-        //1
-       tipCalc.total = Double((totalTextFeild.text as NSString).doubleValue)
-        //2
+        
+        tipCalc.total = Double((totalTextFeild.text as NSString).doubleValue)
         let possibleTips = tipCalc.returnPossibleTip()
-        var results = ""
-        //3
-        for (tipPct, tipVaue) in possibleTips{
-          //4
-            results += "\(tipPct)%: \(tipVaue)\n"
-        }
-        //5
-        resultsTextview.text = results
+        let  sortedKeys = sorted(Array(possibleTips.keys))
+        tableView.reloadData()
     }
     @IBAction func taxPercentage (sender: AnyObject) {
         tipCalc.taxPct = Double(taxPctSlider.value)/100.0;
